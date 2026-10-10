@@ -1,63 +1,102 @@
-/* Cart Page Styling (Already have App.css)*/
-
-/* .cart-item-row {
+/* =========================================
+   OTP Modal CSS
+========================================= */
+.otp-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
-  background: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  margin-bottom: 15px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  justify-content: center;
   align-items: center;
+  z-index: 9999;
+  backdrop-filter: blur(3px); /* পেছনের অংশ ঘোলা করবে */
 }
 
-.cart-item-img {
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-right: 20px;
-}
-
-.cart-item-info h3 {
-  margin: 0 0 10px 0;
-  font-size: 1.2rem;
-}
-
-.cart-item-info .price {
-  font-size: 1.1rem;
-  font-weight: bold;
-  color: #ff6347;
-}
-
-.btn-remove {
-  background: #fff5f5;
-  color: #ff4d4d;
-  border: 1px solid #ff4d4d;
-  padding: 5px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-top: 10px;
-} */
-
-/* Summary Card */
-/*
- .summary-card {
+.otp-modal-box {
   background: #fff;
-  padding: 25px;
-  border-radius: 15px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-  position: sticky;
-  top: 20px;
+  padding: 30px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: slideDown 0.3s ease;
 }
 
-.summary-total {
-  display: flex;
-  justify-content: space-between;
-  font-size: 1.2rem;
+.otp-modal-box h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.otp-modal-box p {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+.otp-input-field {
+  width: 100%;
+  padding: 12px;
+  font-size: 1.5rem;
+  text-align: center;
+  letter-spacing: 5px; /* সংখ্যাগুলোর মাঝে ফাঁকা জায়গা */
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  outline: none;
   font-weight: bold;
-  margin: 20px 0;
 }
 
-.total-price {
-  color: #28a745;
-} */
+.otp-input-field:focus {
+  border-color: #ff6347; /* আপনার থিমের কালার */
+}
+
+.otp-modal-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: space-between;
+}
+
+.btn-otp-cancel {
+  flex: 1;
+  padding: 12px;
+  background: #f1f3f5;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #555;
+  transition: 0.2s;
+}
+.btn-otp-cancel:hover {
+  background: #e2e8f0;
+}
+
+.btn-otp-verify {
+  flex: 1;
+  padding: 12px;
+  background: #ff6347; /* আপনার থিমের কালার */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+.btn-otp-verify:hover {
+  background: #e0543c;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

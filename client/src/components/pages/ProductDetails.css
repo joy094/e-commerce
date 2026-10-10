@@ -244,6 +244,7 @@
 }
 
 .btn-custom {
+  gap: 8px !important; /* আইকন এবং টেক্সটের মাঝে ৮ পিক্সেল গ্যাপ তৈরি করবে */
   flex: 1;
   padding: 12px 15px;
   border-radius: 8px;
@@ -437,16 +438,18 @@
     font-size: 1.8rem !important;
   }
 
-  /* Action Buttons Mobile Tweaks */
+  /* Action Buttons Mobile Tweaks (2x2 Grid Fix) */
   .main-action-btns,
   .support-action-btns {
-    flex-direction: column !important;
-    gap: 10px !important;
+    flex-direction: row !important; /* 🔴 column এর বদলে row করে দেওয়া হলো, ফলে পাশাপাশি ২টি বাটন থাকবে */
+    gap: 8px !important;
   }
 
   .btn-custom {
     width: 100% !important;
-    padding: 14px 15px !important;
+    padding: 12px 5px !important; /* মোবাইলের জন্য প্যাডিং কিছুটা কমানো হলো */
+    font-size: 12px !important; /* ছোট স্ক্রিনে লেখা যেন ভেঙে না যায়, তাই ফন্ট সাইজ মানানসই করা হলো */
+    white-space: nowrap !important; /* টেক্সট এক লাইনেই থাকবে */
   }
 
   .spec-category {

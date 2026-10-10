@@ -137,6 +137,29 @@ const CategorySection = ({ title, slug }) => {
                           ) : (
                             <span className="price-tag">৳ {p.price}</span>
                           )}
+
+                          {/* 🔴 রেটিংয়ের কন্টেইনার সব কার্ডেই থাকবে, যাতে হাইট সমান থাকে */}
+                          <div className="product-card-rating">
+                            {p.reviews && p.reviews.length > 0 && (
+                              <>
+                                <div className="stars">
+                                  {[...Array(5)].map((_, index) => (
+                                    <i
+                                      key={index}
+                                      className={
+                                        index < Math.round(p.rating || 5)
+                                          ? "fa-solid fa-star"
+                                          : "fa-regular fa-star"
+                                      }
+                                    ></i>
+                                  ))}
+                                </div>
+                                <span className="review-count">
+                                  ({p.reviews.length})
+                                </span>
+                              </>
+                            )}
+                          </div>
                         </div>
 
                         {/* ============ ৩. ডাইনামিক বাটন লজিক ============ */}

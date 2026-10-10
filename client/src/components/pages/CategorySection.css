@@ -106,16 +106,19 @@
   height: 100%;
 }
 
+/* =========================================
+   Main Product Card Styling
+========================================= */
 .product-card {
-  background-color: var(--card-bg);
+  background-color: #fff;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: var(--shadow-light);
-  transition: all 0.3s ease;
-  height: 100%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* প্রফেশনাল হালকা শ্যাডো */
+  border: 1px solid #f0f0f0;
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--border-light);
+  height: 100%;
+  margin-right: 6px !important; /* 🔴 ডানদিকে হালকা স্পেস দেওয়া হলো যাতে কার্ডগুলো গায়ে গায়ে লেগে না থাকে */
 }
 
 .product-card:hover {
@@ -124,25 +127,28 @@
 }
 
 /* =========================================
-   Image Wrapper & Arogga Discount Badge
+   Product Image (Removed Inner Box for Larger Image)
 ========================================= */
 .product-img-wrapper {
   position: relative;
   width: 100%;
-  height: 165px; /* 🔴 aspect-ratio বাদ দিয়ে এখানে আপনার পছন্দমতো উচ্চতা (যেমন: 160px থেকে 180px) দিন */
-  background: #f9f9f9;
+  height: 170px; /* উচ্চতা কিছুটা বাড়ানো হলো */
+  background: #ffffff !important; /* ভেতরের আলাদা ধূসর ব্যাকগ্রাউন্ড বাদ দেওয়া হলো */
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom: 1px solid var(--border-light);
-  padding: 10px; /* প্যাডিং একটু কমালে ছবির ভেতরের জায়গা বাড়ে, ফলে ছবি বড় দেখায় */
+  border-bottom: 1px solid #f1f5f9; /* শুধু নিচে হালকা একটি দাগ থাকবে */
+  padding: 0 !important; /* 🔴 প্যাডিং জিরো করে দেওয়া হলো, যাতে ছবি পুরোপুরি স্পেস পায় */
   overflow: hidden;
+  border-radius: 8px 8px 0 0;
 }
 
 .product-img-wrapper img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* ছবি কাটবে না, কিন্তু ম্যাক্সিমাম বড় দেখাবে */
+  padding: 5px; /* একদম বর্ডারের সাথে যেন লেগে না যায়, তার জন্য হালকা সেফটি স্পেস */
+  transition: transform 0.3s ease;
 }
 .product-card:hover .product-img-wrapper img {
   transform: scale(1.03);
@@ -422,4 +428,32 @@
   .product-slider-wrapper .swiper-button-next {
     right: -10px !important;
   }
+}
+
+/* =========================================
+   Product Card Rating Stars
+========================================= */
+.product-card-rating {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  margin-bottom: 8px;
+  min-height: 16px; /* 🔴 এই লাইনটি ফাঁকা জায়গাটুকু ধরে রাখবে */
+}
+
+.product-card-rating .stars {
+  display: flex;
+  gap: 2px;
+}
+
+.product-card-rating .stars i {
+  color: #f59e0b; /* সুন্দর সোনালী/হলুদ রঙ */
+  font-size: 11px; /* কার্ডের সাথে মানানসই ছোট সাইজ */
+}
+
+.product-card-rating .review-count {
+  color: #64748b; /* হালকা ধূসর রঙ */
+  font-size: 11px;
+  font-weight: 500;
 }

@@ -100,14 +100,6 @@ const Header = () => {
               Home
             </NavLink>
 
-            {/* কার্ট আইকন */}
-            <NavLink to="/cart" className="nav-item cart-btn">
-              <i className="fa-solid fa-cart-shopping"></i>
-              {cart?.length > 0 && (
-                <span className="cart-badge">{cart.length}</span>
-              )}
-            </NavLink>
-
             {/* ইউজার অথেন্টিকেশন / ড্রপডাউন */}
             {!auth.user ? (
               <div className="auth-links desktop-only">
@@ -137,6 +129,14 @@ const Header = () => {
                 </div>
               </div>
             )}
+
+            {/* কার্ট আইকন */}
+            <NavLink to="/cart" className="nav-item cart-btn">
+              <i className="fa-solid fa-cart-shopping"></i>
+              {cart?.length > 0 && (
+                <span className="cart-badge">{cart.length}</span>
+              )}
+            </NavLink>
           </div>
         </div>
 
@@ -149,15 +149,15 @@ const Header = () => {
       {/* ৩. মোবাইল সাইডবার (Drawer) */}
       <div className={`mobile-sidebar ${isOpen ? "open" : ""}`}>
         <div className="sidebar-header">
-        {/* 🔴 "Menu" লেখার বদলে এখানে লোগো বসানো হলো */}
+          {/* 🔴 "Menu" লেখার বদলে এখানে লোগো বসানো হলো */}
           <Link to="/" onClick={() => setIsOpen(false)}>
-            <img 
-              src="img/RupomiqLogo.png" 
-              alt="RupomiqBd Logo" 
-              className="sidebar-logo-img" 
+            <img
+              src="img/RupomiqLogo.png"
+              alt="RupomiqBd Logo"
+              className="sidebar-logo-img"
             />
           </Link>
-          
+
           {/* ক্লোজ বাটন */}
           <button className="close-btn" onClick={() => setIsOpen(false)}>
             <i className="fa-solid fa-xmark"></i>
