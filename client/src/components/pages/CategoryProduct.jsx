@@ -211,20 +211,37 @@ const CategoryProduct = () => {
                           )}
                         </div>
 
-                        <button
-                          className="add-cart-btn"
-                          onClick={() => {
-                            setCart([...cart, p]);
-                            localStorage.setItem(
-                              "cart",
-                              JSON.stringify([...cart, p]),
-                            );
-                            toast.success("Item Added to cart");
-                          }}
-                        >
-                          <i className="fa-solid fa-cart-shopping"></i> Add To
-                          Cart
-                        </button>
+                        {/* ============ ডাইনামিক বাটন লজিক ============ */}
+                        {p.variants && p.variants.length > 0 ? (
+                          <button
+                            className="add-cart-btn"
+                            style={{
+                              backgroundColor: "#0f172a",
+                            }} /* সিলেক্ট অপশন বাটনের কালার একটু আলাদা বোঝানোর জন্য ডার্ক করা হলো */
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              navigate(`/product/${p.slug}`); // ভ্যারিয়েন্ট থাকলে ডিটেইলস পেজে নিয়ে যাবে
+                            }}
+                          >
+                            Select Options
+                          </button>
+                        ) : (
+                          <button
+                            className="add-cart-btn"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setCart([...cart, p]);
+                              localStorage.setItem(
+                                "cart",
+                                JSON.stringify([...cart, p]),
+                              );
+                              toast.success("Item Added to cart");
+                            }}
+                          >
+                            <i className="fa-solid fa-cart-shopping"></i> Add To
+                            Cart
+                          </button>
+                        )}
                       </div>
                     </div>
                   );
