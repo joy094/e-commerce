@@ -19,7 +19,7 @@ const Products = () => {
     } catch (error) {
       console.log(error);
       toast.error("Something Went Wrong");
-    }z
+    }
   };
 
   useEffect(() => {

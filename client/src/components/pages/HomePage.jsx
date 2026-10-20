@@ -4,7 +4,10 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import HeroSlider from "./HeroSlider"; // পাথ নিশ্চিত করে নিন
 import CategorySection from "./CategorySection"; // পাথ নিশ্চিত করে নিন
-import "./HomePage.css"; 
+// সবার উপরে ইম্পোর্ট করবেন
+import HomeCategoryIcons from "./HomeCategoryIcons";
+
+import "./HomePage.css";
 
 const Home = () => {
   const [categories, setCategories] = useState([]);
@@ -32,24 +35,16 @@ const Home = () => {
         {/* ১. কাস্টম ব্যানার স্লাইডার (Hero Section) */}
         <HeroSlider />
 
+        <HomeCategoryIcons />
         {/* ২. ক্যাটাগরি ভিত্তিক সেকশন (Horizontal Scroll) */}
         <div className="product-section">
           {/* এখানে ক্যাটাগরি লিস্ট থেকে ম্যাপ করে সেকশন তৈরি হচ্ছে */}
           {categories?.map((c) => (
-            <CategorySection 
-              key={c._id} 
-              title={c.name} 
-              slug={c.slug} 
-            />
+            <CategorySection key={c._id} title={c.name} slug={c.slug} />
           ))}
         </div>
-
         {/* ৩. চাইলে নিচে একটি 'All Products' গ্রিড রাখতে পারেন (ঐচ্ছিক) */}
         {/* যদি শুধু ক্যাটাগরি স্লাইডার রাখতে চান তবে এটি বাদ দিতে পারেন */}
-
-
-
-        
       </div>
     </Layout>
   );

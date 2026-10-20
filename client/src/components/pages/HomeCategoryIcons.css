@@ -1,0 +1,141 @@
+/* =========================================
+   Home Category Icons Grid
+========================================= */
+.home-category-wrapper {
+  padding: 20px 15px;
+  max-width: 1280px;
+  margin: 0 auto;
+  background: #ffffff;
+}
+
+.category-scroll-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.category-icon-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center; /* ডেক্সটপে সেন্টারে থাকবে */
+  width: 100%;
+}
+
+.category-icon-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  width: 90px;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.category-icon-card:hover {
+  transform: translateY(-5px);
+}
+
+.icon-box {
+  width: 65px;
+  height: 65px;
+  background-color: #f8fafc;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 26px;
+  color: #0284c7;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.category-icon-card:hover .icon-box {
+  background-color: #0284c7;
+  color: #ffffff;
+  box-shadow: 0 8px 15px rgba(2, 132, 199, 0.3);
+}
+
+.category-name {
+  font-size: 13px;
+  color: #334155;
+  text-align: center;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.mobile-scroll-arrow {
+  display: none; /* ডেক্সটপে দেখাবে না */
+}
+
+/* =========================================
+   Mobile Responsiveness (Horizontal Scroll with Arrow)
+========================================= */
+@media (max-width: 768px) {
+  .category-icon-grid {
+    gap: 15px;
+    justify-content: flex-start;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 10px;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* স্ক্রলবার হাইড রাখা */
+  .category-icon-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .category-icon-card {
+    width: 75px;
+    flex-shrink: 0;
+  }
+
+  .icon-box {
+    width: 55px;
+    height: 55px;
+    font-size: 22px;
+  }
+
+  .category-name {
+    font-size: 11px;
+  }
+
+  /* 🔴 মোবাইল স্ক্রিনের ডানপাশে ভাসমান স্মুথ অ্যারো বাটন */
+  .mobile-scroll-arrow {
+    display: flex;
+    position: absolute;
+    right: -5px;
+    top: 35%;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 28px;
+    background-color: rgba(2, 132, 199, 0.9);
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 5;
+    cursor: pointer;
+    animation: pulse-arrow 1.5s infinite alternate;
+  }
+
+  /* অ্যারোটি হালকা পালস/অ্যানিমেট করবে যাতে ইউজারের দৃষ্টি আকর্ষণ হয় */
+  @keyframes pulse-arrow {
+    0% {
+      transform: translateY(-50%) scale(0.95);
+    }
+    100% {
+      transform: translateY(-50%) scale(1.1);
+    }
+  }
+}

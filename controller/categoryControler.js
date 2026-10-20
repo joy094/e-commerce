@@ -1,22 +1,19 @@
-//category controller
-
 import Category from "../model/categoryModel.js";
 import slugify from "slugify";
-
 
 // স্লাগ জেনারেট করার জন্য কাস্টম ফাংশন
 const generateSlug = (text) => {
   return text
     .trim()
     .replace(/\s+/g, "-") // স্পেসের বদলে ড্যাশ (-) হবে
-    .replace(/[^\u0980-\u09FF\w-]+/g, "") // বাংলা অক্ষর (\u0980-\u09FF) এবং ইংরেজি অক্ষর ছাড়া বাকি সব রিমুভ করবে
+    .replace(/[^\u0980-\u09FF\w-]+/g, "") // বাংলা অক্ষর (\u0980-\u09FF) এবং ইংরেজি অক্ষর ছাড়া বাকি সব রিমুভ করবে
     .toLowerCase();
 };
 
 // Create Category
 export const createCategoryController = async (req, res) => {
   try {
-    const { name } = req.body;
+    const { name, icon } = req.body; // 🔴 icon রিসিভ করা হলো
     if (!name) {
       return res.status(400).send({ message: "Name is required" });
     }
@@ -29,10 +26,11 @@ export const createCategoryController = async (req, res) => {
       });
     }
 
-    // নতুন স্লাগ লজিক
+    // নতুন ক্যাটাগরি তৈরি (icon সহ)
     const category = await new Category({
       name,
       slug: generateSlug(name),
+      icon: icon || "fa-solid fa-folder", // 🔴 icon সেভ করা হচ্ছে (না থাকলে ডিফল্ট)
     }).save();
 
     res.status(201).send({
@@ -53,7 +51,7 @@ export const createCategoryController = async (req, res) => {
 // Update Category
 export const updateCreateCategoryController = async (req, res) => {
   try {
-    const { name } = req.body;
+    const { name, icon } = req.body; // 🔴 icon রিসিভ করা হলো
     const { id } = req.params;
 
     const category = await Category.findByIdAndUpdate(
@@ -61,6 +59,7 @@ export const updateCreateCategoryController = async (req, res) => {
       {
         name,
         slug: generateSlug(name),
+        icon, // 🔴 আপডেট করার সময় icon পাঠানো হচ্ছে
       },
       { new: true },
     );
@@ -79,8 +78,8 @@ export const updateCreateCategoryController = async (req, res) => {
     });
   }
 };
-// ... বাকি মেথডগুলো (get, single, delete) আগের মতোই থাকবে।
-//get all category controller
+
+// get all category controller
 export const getCategoryController = async (req, res) => {
   try {
     const category = await Category.find({});
@@ -100,7 +99,7 @@ export const getCategoryController = async (req, res) => {
   }
 };
 
-//get single category controller
+// get single category controller
 export const singleCategoryController = async (req, res) => {
   try {
     const { slug } = req.params;
@@ -126,7 +125,7 @@ export const singleCategoryController = async (req, res) => {
   }
 };
 
-//delete category controller
+// delete category controller
 export const deleteCategoryController = async (req, res) => {
   try {
     const { id } = req.params;

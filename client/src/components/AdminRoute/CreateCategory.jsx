@@ -1,32 +1,32 @@
-//src/components/AdminRoute/CreateCategory.jsx
-
-import React from "react";
-
+import React, { useEffect, useState } from "react";
 import AdminMenu from "./AdminMenu";
-import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
-import CategoryForm from "./CategoryForm";
-
 import "./CreateCategory.css";
 
 const CreateCategory = () => {
   const [categories, setCategories] = useState([]);
   const [name, setName] = useState("");
+  const [icon, setIcon] = useState(""); // 🔴 আইকনের জন্য নতুন স্টেট
+
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
+
   const [updatedName, setUpdatedName] = useState("");
+  const [updatedIcon, setUpdatedIcon] = useState(""); // 🔴 এডিট করার জন্য আইকন স্টেট
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const { data } = await axios.post("/api/v1/category/create-category", {
         name,
+        icon, // 🔴 ব্যাকএন্ডে আইকন পাঠানো হচ্ছে
       });
       if (data?.success) {
         toast.success(data.message);
         setName("");
+        setIcon("");
         getAllCategories();
       } else {
         toast.error(data.message);
@@ -52,6 +52,7 @@ const CreateCategory = () => {
   const handleEditClick = (category) => {
     setSelectedCategory(category);
     setUpdatedName(category.name);
+    setUpdatedIcon(category.icon || ""); // 🔴 আগের আইকন বক্সে দেখানোর জন্য
     setEditModalOpen(true);
   };
 
@@ -59,7 +60,7 @@ const CreateCategory = () => {
     try {
       const { data } = await axios.put(
         `/api/v1/category/update-category/${selectedCategory._id}`,
-        { name: updatedName },
+        { name: updatedName, icon: updatedIcon }, // 🔴 আপডেট করা আইকন পাঠানো হচ্ছে
       );
       if (data.success) {
         toast.success(data.message);
@@ -89,22 +90,42 @@ const CreateCategory = () => {
   return (
     <>
       <div className="container dashboard-grid">
-          
         <div className="content-area">
           <h1 className="page-title">Manage Categories</h1>
 
+          {/* 🔴 নতুন ফর্ম (নাম এবং আইকন ইনপুট) */}
           <div className="form-container-card">
-            <CategoryForm
-              handleSubmit={handleSubmit}
-              value={name}
-              setValue={setName}
-            />
+            <form onSubmit={handleSubmit} className="category-add-form">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Category Name (e.g. Books)"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Icon Class (e.g. fa-solid fa-book)"
+                value={icon}
+                onChange={(e) => setIcon(e.target.value)}
+              />
+              <button
+                type="submit"
+                className="btn-primary"
+                style={{ padding: "10px 20px" }}
+              >
+                Add Category
+              </button>
+            </form>
           </div>
 
-          <div className="table-wrapper">
+          <div className="table-wrapper mt-4">
             <table className="custom-table">
               <thead>
                 <tr>
+                  <th>Icon</th> {/* 🔴 টেবিলের নতুন কলাম */}
                   <th>Category Name</th>
                   <th>Actions</th>
                 </tr>
@@ -112,6 +133,21 @@ const CreateCategory = () => {
               <tbody>
                 {categories.map((c) => (
                   <tr key={c._id}>
+                    <td style={{ fontSize: "20px", color: "#0284c7" }}>
+                      {c.icon && c.icon.startsWith("http") ? (
+                        <img
+                          src={c.icon}
+                          alt="icon"
+                          style={{
+                            width: "25px",
+                            height: "25px",
+                            objectFit: "contain",
+                          }}
+                        />
+                      ) : (
+                        <i className={c.icon || "fa-solid fa-folder"}></i>
+                      )}
+                    </td>
                     <td>{c.name}</td>
                     <td>
                       <button
@@ -148,15 +184,26 @@ const CreateCategory = () => {
               &times;
             </span>
             <h2>Edit Category</h2>
-            <div className="modal-body">
+            <div
+              className="modal-body"
+              style={{ display: "flex", flexDirection: "column", gap: "15px" }}
+            >
               <input
                 className="modal-input"
                 type="text"
+                placeholder="Category Name"
                 value={updatedName}
                 onChange={(e) => setUpdatedName(e.target.value)}
               />
+              <input
+                className="modal-input"
+                type="text"
+                placeholder="Icon Class (e.g. fa-solid fa-laptop)"
+                value={updatedIcon}
+                onChange={(e) => setUpdatedIcon(e.target.value)}
+              />
               <button className="btn-primary" onClick={handleEditSave}>
-                Update Name
+                Update Category
               </button>
             </div>
           </div>
