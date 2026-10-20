@@ -1,84 +1,145 @@
-/* AdminDashboard.css */
+/* client/src/components/AdminRoute/AdminDashboard.css */
 
 .admin-dashboard-grid {
-  display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 30px;
-  padding: 40px 15px;
-  min-height: 80vh;
+  width: 100%;
+  animation: fadeIn 0.4s ease-in-out;
 }
 
+.admin-content-area {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* =========================================
+   Admin Profile Card
+========================================= */
 .admin-profile-card {
-  background: #ffffff;
+  background-color: #ffffff;
   border-radius: 12px;
-  border: 1px solid #e3e6f0;
-  box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+  box-shadow:
+    0 10px 25px -5px rgba(0, 0, 0, 0.05),
+    0 8px 10px -6px rgba(0, 0, 0, 0.01);
+  border: 1px solid #f3f4f6;
   overflow: hidden;
+  transition: box-shadow 0.3s ease;
 }
 
+.admin-profile-card:hover {
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* =========================================
+   Card Header
+========================================= */
 .admin-card-header {
-  background-color: #4e73df; /* এডমিন থিম কালার (Blue) */
-  padding: 25px;
-  color: white;
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+  padding: 30px;
+  border-bottom: 1px solid #e5e7eb;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
 }
 
 .admin-badge {
-  background: rgba(255, 255, 255, 0.2);
-  padding: 5px 15px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 1px;
+  background-color: #059669; /* Emerald Green */
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  padding: 6px 14px;
+  border-radius: 50px;
+  text-transform: uppercase;
+  box-shadow: 0 4px 6px rgba(5, 150, 105, 0.2);
 }
 
 .admin-title {
-  font-size: 22px;
   margin: 0;
-  font-weight: 600;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #111827;
 }
 
+/* =========================================
+   Card Body & Info Boxes
+========================================= */
 .admin-info-body {
   padding: 30px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
 }
 
 .info-box {
-  background: #f8f9fc;
-  padding: 15px 20px;
+  background-color: #f9fafb;
+  padding: 20px;
   border-radius: 10px;
-  border-left: 4px solid #4e73df;
+  border: 1px solid #e5e7eb;
+  transition: all 0.2s ease;
+}
+
+.info-box:hover {
+  background-color: #ffffff;
+  border-color: #059669;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.08);
 }
 
 .info-box label {
   display: block;
-  font-size: 12px;
-  color: #858796;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #6b7280;
   text-transform: uppercase;
-  font-weight: 700;
-  margin-bottom: 5px;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
 }
 
 .info-box p {
-  font-size: 18px;
-  color: #5a5c69;
+  margin: 0;
+  font-size: 1.1rem;
   font-weight: 600;
-  margin-bottom: 0;
+  color: #1f2937;
+  word-break: break-all; /* বড় ইমেইল ভেঙে নিচে নামানোর জন্য */
 }
 
-/* --- Responsive --- */
-@media (max-width: 992px) {
-  .admin-dashboard-grid {
-    grid-template-columns: 1fr;
+/* =========================================
+   Animations
+========================================= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-@media (max-width: 576px) {
+/* =========================================
+   Mobile Responsive
+========================================= */
+@media (max-width: 640px) {
+  .admin-card-header {
+    padding: 20px;
+    align-items: center; /* মোবাইলে লেখাগুলো মাঝে আনার জন্য */
+    text-align: center;
+  }
+
+  .admin-title {
+    font-size: 1.5rem;
+  }
+
   .admin-info-body {
-    grid-template-columns: 1fr;
+    padding: 20px;
+    grid-template-columns: 1fr; /* মোবাইলে একটি কলামে চলে আসবে */
+    gap: 15px;
+  }
+
+  .info-box {
+    text-align: center; /* মোবাইলের জন্য টেক্সট সেন্টারে */
   }
 }

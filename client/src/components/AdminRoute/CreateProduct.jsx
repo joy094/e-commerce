@@ -1,7 +1,7 @@
 // CreateProduct.jsx
 
 import React, { useState, useEffect } from "react";
-import Layout from "../../components/pages/Layout";
+
 import AdminMenu from "./AdminMenu";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -212,9 +212,9 @@ const CreateProduct = () => {
   };
 
   return (
-    <Layout title={"Create Product - Admin"}>
+    <>
       <div className="container dashboard-grid">
-        <AdminMenu />
+          
         <div className="content-area">
           <h1 className="page-title">Add New Product</h1>
           <form className="product-form-card" onSubmit={handleCreate}>
@@ -653,7 +653,7 @@ const CreateProduct = () => {
           </form>
         </div>
       </div>
-    </Layout>
+    </>
   );
 };
 

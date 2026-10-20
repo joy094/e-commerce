@@ -1,7 +1,7 @@
 // src/pages/Admin/ManageSlider.jsx
 
 import React, { useState, useEffect } from "react";
-import Layout from "../../components/pages/Layout";
+
 import AdminMenu from "../../components/AdminRoute/AdminMenu";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -81,11 +81,11 @@ const ManageSlider = () => {
   };
 
   return (
-    <Layout title={"Manage Slider - Admin Panel"}>
+    <>
       <div className="slider-dashboard container-fluid m-3 p-3">
         <div className="row">
           <div className="col-md-3">
-            <AdminMenu />
+              
           </div>
           <div className="col-md-9">
             <h2 className="mb-4 fw-bold text-dark">Manage Hero Slider</h2>
@@ -189,7 +189,7 @@ const ManageSlider = () => {
           </div>
         </div>
       </div>
-    </Layout>
+    </>
   );
 };
 

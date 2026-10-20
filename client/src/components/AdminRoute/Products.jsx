@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import AdminMenu from "./AdminMenu";
-import Layout from "../../components/pages/Layout";
+
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
@@ -19,7 +19,7 @@ const Products = () => {
     } catch (error) {
       console.log(error);
       toast.error("Something Went Wrong");
-    }
+    }z
   };
 
   useEffect(() => {
@@ -33,9 +33,9 @@ const Products = () => {
   };
 
   return (
-    <Layout title={"All Products - Admin Dashboard"}>
+    <>
       <div className="container dashboard-grid">
-        <AdminMenu />
+          
         <div className="content-area">
           <h1 className="page-title">Manage Products ({products.length})</h1>
 
@@ -98,7 +98,7 @@ const Products = () => {
           </div>
         </div>
       </div>
-    </Layout>
+    </>
   );
 };
 

@@ -1,0 +1,32 @@
+/* src/components/AdminLayout.css */
+.admin-layout-container {
+  display: flex;
+  min-height: 85vh;
+  background-color: #f3f4f6;
+}
+
+.admin-sidebar {
+  width: 260px;
+  background: #ffffff;
+  border-right: 1px solid #e5e7eb;
+  padding: 1.5rem 1rem;
+  flex-shrink: 0;
+}
+
+.admin-content {
+  flex-grow: 1;
+  padding: 2rem;
+  overflow-x: auto;
+}
+
+/* মোবাইল রেসপনসিভ */
+@media (max-width: 768px) {
+  .admin-layout-container {
+    flex-direction: column;
+  }
+  .admin-sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #e5e7eb;
+  }
+}

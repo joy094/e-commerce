@@ -1,7 +1,7 @@
 //UpdateProduct.jsx
 
 import React, { useState, useEffect } from "react";
-import Layout from "../../components/pages/Layout";
+
 import AdminMenu from "./AdminMenu";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -256,9 +256,9 @@ const UpdateProduct = () => {
   };
 
   return (
-    <Layout title={"Dashboard - Update Product"}>
+    <>
       <div className="container dashboard-grid">
-        <AdminMenu />
+          
         <div className="content-area">
           <h1 className="page-title">Update Product Details</h1>
           <form className="product-form-card" onSubmit={handleUpdate}>
@@ -726,7 +726,7 @@ const UpdateProduct = () => {
           </form>
         </div>
       </div>
-    </Layout>
+    </>
   );
 };
 

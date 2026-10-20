@@ -1,5 +1,5 @@
 import React from "react";
-import Layout from "../../components/pages/Layout";
+
 import { useAuth } from "../../context/auth";
 import AdminMenu from "./AdminMenu";
 import "./AdminDashboard.css"; // নতুন CSS ফাইল
@@ -7,9 +7,9 @@ import "./AdminDashboard.css"; // নতুন CSS ফাইল
 const AdminDashboard = () => {
   const [auth] = useAuth();
   return (
-    <Layout title={"Admin Dashboard"}>
+    <>
       <div className="container admin-dashboard-grid">
-        <AdminMenu />
+          
         <div className="admin-content-area">
           <div className="admin-profile-card">
             <div className="admin-card-header">
@@ -34,7 +34,7 @@ const AdminDashboard = () => {
           </div>
         </div>
       </div>
-    </Layout>
+    </>
   );
 };
 

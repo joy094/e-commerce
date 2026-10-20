@@ -1,5 +1,7 @@
+//src/components/AdminRoute/CreateCategory.jsx
+
 import React from "react";
-import Layout from "../../components/pages/Layout";
+
 import AdminMenu from "./AdminMenu";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -85,9 +87,9 @@ const CreateCategory = () => {
   };
 
   return (
-    <Layout>
+    <>
       <div className="container dashboard-grid">
-        <AdminMenu />
+          
         <div className="content-area">
           <h1 className="page-title">Manage Categories</h1>
 
@@ -190,7 +192,7 @@ const CreateCategory = () => {
           </div>
         </div>
       )}
-    </Layout>
+    </>
   );
 };
 

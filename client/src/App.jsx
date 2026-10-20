@@ -29,6 +29,7 @@ import Register from "./components/pages/RegisterPage";
 import Login from "./components/pages/LoginPage";
 import Dashboard from "./components/UserPrivateRoute/UserDashboard";
 import AdminDashboard from "./components/AdminRoute/AdminDashboard";
+import AdminLayout from "./components/AdminRoute/AdminLayout";
 import Search from "./components/pages/Search";
 import NotfoundPage from "./components/NotfoundPage";
 import ForgotPassword from "./components/pages/FogetPassword";
@@ -92,15 +93,17 @@ const App = () => (
 
     {/* Admin Routes */}
     <Route path="/dashboard" element={<AdminRoute />}>
-      <Route path="admin" element={<AdminDashboard />} />
+      <Route element={<AdminLayout />}>
+        <Route path="admin" element={<AdminDashboard />} />
 
-      <Route path="admin/create-category" element={<CreateCategory />} />
-      <Route path="admin/products" element={<Products />} />
-      <Route path="admin/update-product/:slug" element={<UpdateProduct />} />
-      <Route path="admin/create-product" element={<CreateProduct />} />
-      <Route path="admin/users" element={<Users />} />
-      <Route path="admin/orders" element={<AdminOrders />} />
-      <Route path="admin/manage-slider" element={<ManageSlider />} />
+        <Route path="admin/create-category" element={<CreateCategory />} />
+        <Route path="admin/products" element={<Products />} />
+        <Route path="admin/update-product/:slug" element={<UpdateProduct />} />
+        <Route path="admin/create-product" element={<CreateProduct />} />
+        <Route path="admin/users" element={<Users />} />
+        <Route path="admin/orders" element={<AdminOrders />} />
+        <Route path="admin/manage-slider" element={<ManageSlider />} />
+      </Route>
     </Route>
 
     <Route path="*" element={<NotfoundPage />} />

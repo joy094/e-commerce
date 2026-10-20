@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "../../context/auth";
-import Layout from "../../components/pages/Layout";
+
 import AdminMenu from "./AdminMenu";
 import moment from "moment";
 import { toast } from "react-toastify";
@@ -68,11 +68,11 @@ const AdminOrders = () => {
   };
 
   return (
-    <Layout title={"All Orders Data"}>
+    <>
       <div className="container dashboard-grid admin-orders-main">
         <div className="row mt-3">
           <div className="col-md-3">
-            <AdminMenu />
+              
           </div>
           <div className="col-md-9">
             <h1 className="page-title text-center mb-4">Manage All Orders</h1>
@@ -271,7 +271,7 @@ const AdminOrders = () => {
           </div>
         </div>
       </div>
-    </Layout>
+    </>
   );
 };
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Layout from "../../components/pages/Layout";
+
 import AdminMenu from "./AdminMenu";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -26,9 +26,9 @@ const Users = () => {
   }, []);
 
   return (
-    <Layout title={"Dashboard - All Users"}>
+    <>
       <div className="container dashboard-grid">
-        <AdminMenu />
+       
         <div className="content-area">
           <h1 className="page-title">All Registered Users ({users.length})</h1>
 
@@ -84,7 +84,7 @@ const Users = () => {
           </div>
         </div>
       </div>
-    </Layout>
+    </>
   );
 };
 
