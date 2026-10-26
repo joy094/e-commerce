@@ -53,6 +53,11 @@ import Products from "./components/AdminRoute/Products";
 
 import ScrollToTop from "./components/ScrollToTop"; // ScrollToTop Component ইমপোর্ট
 import ManageSlider from "./components/AdminRoute/ManageSlider"; // পাথ ঠিক করে ইম্পোর্ট করুন
+import CreateLandingPage from "./components/AdminRoute/CreateLandingPage";
+import AllLandingPages from "./components/AdminRoute/AllLandingPages"; // ফাইল ইম্পোর্ট করুন
+import LandingPageView from "./components/pages/LandingPageView";
+
+
 
 // ================= PAGES =================
 
@@ -83,6 +88,7 @@ const App = () => (
     <Route path="/cart" element={<CartPage />} />
     <Route path="/product/:slug" element={<ProductDetails />} />
     <Route path="/category/:slug" element={<CategoryProduct />} />
+    <Route path="/lp/:slug" element={<LandingPageView />} />
 
     {/* User Routes */}
     <Route path="/dashboard" element={<PrivateRoute />}>
@@ -103,6 +109,13 @@ const App = () => (
         <Route path="admin/users" element={<Users />} />
         <Route path="admin/orders" element={<AdminOrders />} />
         <Route path="admin/manage-slider" element={<ManageSlider />} />
+        <Route
+          path="/dashboard/admin/create-landing-page"
+          element={<CreateLandingPage />}
+        />
+
+        <Route path="admin/landing-pages" element={<AllLandingPages />} />
+        
       </Route>
     </Route>
 

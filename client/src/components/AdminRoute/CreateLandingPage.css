@@ -1,0 +1,290 @@
+/* =========================================
+   Base Styles (Desktop & Tablet)
+========================================= */
+.builder-main-area {
+  background: #f8fafc;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.builder-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.stepper-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.stepper-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  position: relative;
+}
+
+.step-counter {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color: #64748b;
+  margin-bottom: 8px;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.stepper-item.active .step-counter {
+  background: #e11d48; /* Red theme from mockup */
+  color: white;
+}
+
+.stepper-item.completed .step-counter {
+  background: #10b981; /* Green for completed */
+  color: white;
+}
+
+.step-name {
+  font-size: 13px;
+  color: #475569;
+  text-align: center;
+}
+
+.step-content {
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.product-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.product-select-card {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.product-select-card:hover {
+  background: #f1f5f9;
+}
+
+.product-select-card.selected {
+  border-color: #e11d48;
+  background: #fff1f2;
+}
+
+.product-select-card input[type="radio"] {
+  accent-color: #e11d48;
+}
+
+.product-select-card img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin: 0 15px;
+}
+
+.template-grid {
+  display: flex;
+  gap: 20px;
+}
+
+.template-card {
+  flex: 1;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.template-card:hover {
+  border-color: #cbd5e1;
+}
+
+.template-card.selected {
+  border-color: #e11d48;
+  background-color: #fff1f2;
+}
+
+.template-preview {
+  height: 150px;
+  background: #f1f5f9;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #94a3b8;
+}
+
+.preview-box {
+  border: 2px dashed #cbd5e1;
+  padding: 40px;
+  text-align: center;
+  border-radius: 10px;
+  background: #f8fafc;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-next,
+.btn-publish {
+  background: #e11d48;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 5px;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+
+.btn-next:hover,
+.btn-publish:hover {
+  background: #be123c;
+}
+
+.btn-back {
+  background: #64748b;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.btn-back:hover {
+  background: #475569;
+}
+
+.btn-next:disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
+}
+
+/* =========================================
+   Mobile Responsiveness (Max-width: 768px)
+========================================= */
+@media (max-width: 768px) {
+  .builder-main-area {
+    padding: 10px;
+  }
+
+  .builder-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+    padding: 15px;
+  }
+
+  .builder-header button {
+    width: 100%; /* বাটন ফুল উইডথ করা হলো */
+  }
+
+  .stepper-wrapper {
+    padding: 15px 5px;
+    margin-bottom: 20px;
+    gap: 5px;
+  }
+
+  /* মোবাইলে স্টেপারের টেক্সট সাইজ ছোট করা হলো */
+  .step-name {
+    font-size: 10px;
+    line-height: 1.2;
+    margin-top: 5px;
+  }
+
+  .step-counter {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  .step-content {
+    padding: 15px;
+  }
+
+  .product-select-card {
+    padding: 10px;
+  }
+
+  .product-select-card img {
+    width: 45px;
+    height: 45px;
+    margin: 0 10px;
+  }
+
+  .product-info h6 {
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  .product-info .price {
+    font-size: 13px;
+  }
+
+  /* 🔴 মোবাইলে টেমপ্লেটগুলো পাশাপাশি না থেকে নিচে নিচে (Stack) আসবে */
+  .template-grid {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .template-card {
+    padding: 15px;
+  }
+
+  .template-preview {
+    height: 120px; /* মোবাইলে প্রিভিউ বক্স একটু ছোট করা হলো */
+  }
+
+  /* মোবাইলে প্রিভিউ বক্সের প্যাডিং কমানো হলো */
+  .preview-box {
+    padding: 20px;
+  }
+
+  /* 🔴 অ্যাকশন বাটনগুলো ফুল-উইডথ করা হলো যাতে আঙুলে ট্যাপ করতে সুবিধা হয় */
+  .action-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .action-buttons button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+  }
+}

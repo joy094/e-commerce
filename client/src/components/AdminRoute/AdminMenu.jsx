@@ -56,6 +56,31 @@ function AdminMenu() {
           Manage Orders
         </NavLink>
 
+
+
+
+ <NavLink
+          to="/dashboard/admin/create-landing-page"
+          className={({ isActive }) =>
+            isActive ? "menu-item active" : "menu-item"
+          }
+        >
+        Create Landing Pages
+        </NavLink>
+
+
+
+
+        <NavLink
+          to="/dashboard/admin/landing-pages"
+          className={({ isActive }) =>
+            isActive ? "menu-item active" : "menu-item"
+          }
+        >
+          All Landing Pages
+        </NavLink>
+
+      
         <NavLink
           to="/dashboard/admin/users"
           className={({ isActive }) =>

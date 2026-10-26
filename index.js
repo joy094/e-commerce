@@ -12,6 +12,7 @@ import { requireSignIn } from "./middleware/authMiddleware.js";
 import cors from "cors";
 import bannerRoutes from "./routes/bannerRoute.js";
 import otpRoutes from "./routes/otpRoute.js"; // 🔴 নতুন OTP রাউট ইম্পোর্ট করা হলো
+import landingPageRoutes from "./routes/landingPageRoute.js"
 const app = express();
 const port = process.env.PORT || 8080;
 
@@ -32,6 +33,7 @@ app.use("/api/v1/product", productRoutes);
 app.use("/api/v1/banner", bannerRoutes);
 // 🔴 আপনার নতুন OTP রাউটটি এখানে যুক্ত করুন
 app.use("/api/v1/otp", otpRoutes);
+app.use("/api/v1/landing-page", landingPageRoutes);
 
 //get route
 app.get("/", (req, res) => {
