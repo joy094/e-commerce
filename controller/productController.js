@@ -17,7 +17,7 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// --- ১. ক্রিয়েট প্রোডাক্ট ---
+// --- ১. ক্রিয়েট প্রোডাক্ট ---
 export const createProductController = async (req, res) => {
   try {
     const {
@@ -32,6 +32,7 @@ export const createProductController = async (req, res) => {
       highlights,
       variants,
       specifications,
+      videoLink, // 🔴 ইউটিউব লিংকের জন্য এটি যুক্ত করা হলো
     } = req.fields;
     const { photo, extraPhotos } = req.files;
 
@@ -41,7 +42,7 @@ export const createProductController = async (req, res) => {
     }
 
     const products = new productModel({
-      ...req.fields,
+      ...req.fields, // 🔴 videoLink সহ বাকি সব ফিল্ড এখানে স্বয়ংক্রিয়ভাবে চলে আসবে
       slug: slugify(name, { lower: true, strict: false }),
     });
 
@@ -71,7 +72,7 @@ export const createProductController = async (req, res) => {
           photosArray[i].path,
           {
             folder: "rupomiq_products",
-          },
+          }
         );
         extraPhotosUrls.push(uploadedResponse.secure_url);
       }
@@ -169,6 +170,7 @@ export const updateProductController = async (req, res) => {
       shipping,
       variants,
       specifications,
+      videoLink, // 🔴 ইউটিউব লিংকের জন্য এটি যুক্ত করা হলো
     } = req.fields;
     const { photo } = req.files;
 
@@ -179,7 +181,7 @@ export const updateProductController = async (req, res) => {
       slug = name.trim().replace(/\s+/g, "-").toLowerCase();
     }
 
-    const updateData = { ...req.fields, slug };
+    const updateData = { ...req.fields, slug }; // 🔴 videoLink সহ বাকি আপডেট ডেটা এখানে চলে আসবে
 
     if (variants) updateData.variants = JSON.parse(variants);
     if (specifications) updateData.specifications = JSON.parse(specifications);
@@ -190,7 +192,7 @@ export const updateProductController = async (req, res) => {
       { new: true },
     );
 
-    // আপডেট করার সময় Cloudinary-তে আপলোড (FIXED)
+    // আপডেট করার সময় Cloudinary-তে আপলোড (FIXED)
     if (photo) {
       const uploadedResponse = await cloudinary.uploader.upload(photo.path, {
         folder: "rupomiq_products",

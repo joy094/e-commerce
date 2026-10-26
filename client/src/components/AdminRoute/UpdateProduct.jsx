@@ -1,7 +1,6 @@
 //UpdateProduct.jsx
 
 import React, { useState, useEffect } from "react";
-
 import AdminMenu from "./AdminMenu";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -64,6 +63,7 @@ const UpdateProduct = () => {
   const [quantity, setQuantity] = useState("");
   const [shipping, setShipping] = useState("");
   const [status, setStatus] = useState("");
+  const [videoLink, setVideoLink] = useState(""); // 🔴 ভিডিও লিংকের জন্য স্টেট
   const [id, setId] = useState("");
 
   // ইমেজ স্টেট (নতুন ও পুরোনো ছবি হ্যান্ডেল করার জন্য)
@@ -96,6 +96,7 @@ const UpdateProduct = () => {
       setShipping(data.product.shipping ? "1" : "0");
       setStatus(data.product.status);
       setCategory(data.product.category._id);
+      setVideoLink(data.product.videoLink || ""); // 🔴 ডাটাবেস থেকে ভিডিও লিংক সেট করা
 
       // Cloudinary ইমেজের ডাটা সেভ করা
       setExistingPhoto(data.product.photo || "");
@@ -195,6 +196,7 @@ const UpdateProduct = () => {
       productData.append("category", category);
       productData.append("shipping", shipping);
       productData.append("status", status);
+      productData.append("videoLink", videoLink); // 🔴 আপডেট করার সময় ভিডিও লিংক পাঠানো
 
       photo && productData.append("photo", photo);
 
@@ -258,7 +260,6 @@ const UpdateProduct = () => {
   return (
     <>
       <div className="container dashboard-grid">
-          
         <div className="content-area">
           <h1 className="page-title">Update Product Details</h1>
           <form className="product-form-card" onSubmit={handleUpdate}>
@@ -475,6 +476,18 @@ const UpdateProduct = () => {
               </div>
             </div>
 
+            {/* --- ইউটিউব ভিডিও লিংক (নতুন) --- */}
+            <div className="form-group mb-4">
+              <label>Product Video Link (YouTube)</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="e.g. https://www.youtube.com/watch?v=..."
+                value={videoLink || ""}
+                onChange={(e) => setVideoLink(e.target.value)}
+              />
+            </div>
+
             {/* --- হাইলাইটস (Quick Features) --- */}
             <div className="variant-box p-3 mb-4">
               <h6>Quick Highlights (e.g. Premium Leather, UV Protection)</h6>
@@ -580,7 +593,7 @@ const UpdateProduct = () => {
                     }
                   />
 
-                  {/* Photo Index Input (নতুন যোগ করা হয়েছে) */}
+                  {/* Photo Index Input */}
                   <input
                     type="number"
                     className="form-control"
@@ -617,7 +630,7 @@ const UpdateProduct = () => {
                       style: "",
                       price: "",
                       stock: "",
-                      photoIndex: "", // নতুন ভেরিয়েন্টে ফিল্ডটি যোগ করা হলো
+                      photoIndex: "",
                     },
                   ])
                 }

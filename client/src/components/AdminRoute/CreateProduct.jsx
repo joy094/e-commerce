@@ -1,7 +1,6 @@
 // CreateProduct.jsx
 
 import React, { useState, useEffect } from "react";
-
 import AdminMenu from "./AdminMenu";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -24,6 +23,7 @@ const CreateProduct = () => {
   const [category, setCategory] = useState("");
   const [shipping, setShipping] = useState("1");
   const [status, setStatus] = useState("Active");
+  const [videoLink, setVideoLink] = useState(""); // 🔴 ভিডিও লিংকের জন্য নতুন স্টেট
 
   // ইমেজ স্টেট
   const [photo, setPhoto] = useState(null);
@@ -44,7 +44,7 @@ const CreateProduct = () => {
   // ডাইনামিক ডাটা স্টেট
   const [highlights, setHighlights] = useState([""]);
 
-  // === ফ্যাশন রিলেটেড ভেরিয়েন্ট স্টেট (আপডেট করা হয়েছে) ===
+  // === ফ্যাশন রিলেটেড ভেরিয়েন্ট স্টেট ===
   const [variants, setVariants] = useState([
     {
       size: "",
@@ -53,11 +53,11 @@ const CreateProduct = () => {
       style: "",
       price: "",
       stock: "",
-      photoIndex: "", // নতুন যুক্ত করা হলো
+      photoIndex: "",
     },
   ]);
 
-  // ফ্যাশন ও এক্সেসরিজ ব্র্যান্ড অপশন (ইচ্ছেমতো পরিবর্তন করতে পারবেন)
+  // ব্র্যান্ড অপশন
   const BRAND_OPTIONS = [
     "Gucci",
     "Ray-Ban",
@@ -136,7 +136,7 @@ const CreateProduct = () => {
         style: "",
         price: "",
         stock: "",
-        photoIndex: "", // নতুন যুক্ত করা হলো
+        photoIndex: "",
       },
     ]);
 
@@ -172,6 +172,7 @@ const CreateProduct = () => {
       productData.append("category", category);
       productData.append("shipping", shipping);
       productData.append("status", status);
+      productData.append("videoLink", videoLink); // 🔴 ইউটিউব লিংক অ্যাপেন্ড করা হলো
 
       // মেইন ছবি
       productData.append("photo", photo);
@@ -214,7 +215,6 @@ const CreateProduct = () => {
   return (
     <>
       <div className="container dashboard-grid">
-          
         <div className="content-area">
           <h1 className="page-title">Add New Product</h1>
           <form className="product-form-card" onSubmit={handleCreate}>
@@ -310,17 +310,18 @@ const CreateProduct = () => {
                         >
                           ✕
                         </button>
-                        {/* অ্যাডমিনকে বোঝানোর জন্য ইমেজের ওপর ইনডেক্স নম্বর দেখানো হলো */}
-                        <span style={{
-                          position: "absolute",
-                          bottom: "0",
-                          left: "0",
-                          background: "rgba(0,0,0,0.6)",
-                          color: "white",
-                          fontSize: "10px",
-                          padding: "2px 4px",
-                          borderBottomLeftRadius: "6px"
-                        }}>
+                        <span
+                          style={{
+                            position: "absolute",
+                            bottom: "0",
+                            left: "0",
+                            background: "rgba(0,0,0,0.6)",
+                            color: "white",
+                            fontSize: "10px",
+                            padding: "2px 4px",
+                            borderBottomLeftRadius: "6px",
+                          }}
+                        >
                           Index: {index}
                         </span>
                       </div>
@@ -433,7 +434,19 @@ const CreateProduct = () => {
               </div>
             </div>
 
-            {/* === ৩. হাইলাইটস === */}
+            {/* === ৩. ইউটিউব ভিডিও লিংক (নতুন) === */}
+            <div className="form-group mb-4">
+              <label>Product Video Link (YouTube)</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="e.g. https://www.youtube.com/watch?v=..."
+                value={videoLink}
+                onChange={(e) => setVideoLink(e.target.value)}
+              />
+            </div>
+
+            {/* === ৪. হাইলাইটস === */}
             <div className="variant-box p-3 mb-4">
               <h6>Quick Highlights (e.g. Premium Leather, UV Protection)</h6>
               {highlights.map((h, i) => (
@@ -465,12 +478,11 @@ const CreateProduct = () => {
               </button>
             </div>
 
-            {/* === ৪. অ্যাডভান্সড ভেরিয়েন্ট (Fashion Options) === */}
+            {/* === ৫. অ্যাডভান্সড ভেরিয়েন্ট (Fashion Options) === */}
             <div className="variant-box p-3 mb-4">
               <h6>Product Variants (Size, Color, Material, Style, Photo)</h6>
               {variants.map((v, i) => (
                 <div className="variant-grid-row mb-2" key={i}>
-                  {/* Size Dropdown */}
                   <select
                     className="form-control"
                     value={v.size}
@@ -486,7 +498,6 @@ const CreateProduct = () => {
                     ))}
                   </select>
 
-                  {/* Color Dropdown */}
                   <select
                     className="form-control"
                     value={v.color}
@@ -502,7 +513,6 @@ const CreateProduct = () => {
                     ))}
                   </select>
 
-                  {/* Material Input */}
                   <input
                     type="text"
                     className="form-control"
@@ -512,8 +522,6 @@ const CreateProduct = () => {
                       handleVariantChange(i, "material", e.target.value)
                     }
                   />
-
-                  {/* Style Input */}
                   <input
                     type="text"
                     className="form-control"
@@ -523,8 +531,6 @@ const CreateProduct = () => {
                       handleVariantChange(i, "style", e.target.value)
                     }
                   />
-
-                  {/* Price Input */}
                   <input
                     type="number"
                     className="form-control"
@@ -534,8 +540,6 @@ const CreateProduct = () => {
                       handleVariantChange(i, "price", e.target.value)
                     }
                   />
-
-                  {/* Stock Input */}
                   <input
                     type="number"
                     className="form-control"
@@ -546,7 +550,6 @@ const CreateProduct = () => {
                     }
                   />
 
-                  {/* Photo Index Input (নতুন যোগ করা হয়েছে) */}
                   <input
                     type="number"
                     className="form-control"
@@ -579,7 +582,7 @@ const CreateProduct = () => {
               </button>
             </div>
 
-            {/* === ৫. স্পেসিফিকেশন টেবিল ডাটা === */}
+            {/* === ৬. স্পেসিফিকেশন টেবিল ডাটা === */}
             <div className="spec-box p-3 mb-4">
               <h6>Product Specifications (Table Content)</h6>
               {specifications.map((s, i) => (
@@ -636,7 +639,7 @@ const CreateProduct = () => {
               </button>
             </div>
 
-            {/* === ৬. রিচ টেক্সট এডিটর === */}
+            {/* === ৭. রিচ টেক্সট এডিটর === */}
             <div className="form-group mb-5">
               <label>Detailed Description</label>
               <ReactQuill

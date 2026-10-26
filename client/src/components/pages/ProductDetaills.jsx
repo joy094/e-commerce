@@ -3,9 +3,9 @@
 import React, { useState, useEffect } from "react";
 import Layout from "./Layout";
 import axios from "axios";
-import { useParams, useNavigate, Link } from "react-router-dom"; // 🔴 Link যুক্ত করা হয়েছে
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { useCart } from "../../context/cart";
-import { useAuth } from "../../context/auth"; // 🔴 useAuth ইমপোর্ট করা হয়েছে
+import { useAuth } from "../../context/auth";
 import { toast } from "react-toastify";
 import SimilarProducts from "./SimilarProducts";
 import "./ProductDetails.css";
@@ -14,7 +14,6 @@ const ProductDetails = () => {
   const params = useParams();
   const navigate = useNavigate();
 
-  // 🔴 সমস্ত স্টেট কম্পোনেন্টের ভেতরে রাখা হয়েছে
   const [auth] = useAuth();
   const [product, setProduct] = useState({});
   const [cart, setCart] = useCart();
@@ -27,6 +26,15 @@ const ProductDetails = () => {
   const [comment, setComment] = useState("");
 
   const contactNumber = "+8801728355302";
+
+  // 🔴 YouTube Video ID বের করার ফাংশন
+  const getYouTubeVideoId = (url) => {
+    if (!url) return null;
+    const regExp =
+      /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+    return match && match[2].length === 11 ? match[2] : null;
+  };
 
   const getProduct = async () => {
     try {
@@ -141,21 +149,21 @@ const ProductDetails = () => {
         navigate("/login");
         return;
       }
-      
+
       const { data } = await axios.post(
         `/api/v1/product/product-review/${product._id}`,
-        { 
-          rating, 
+        {
+          rating,
           comment,
-          name: auth?.user?.name // 🔴 ইউজারের নাম এখান থেকে পাঠানো হচ্ছে
-        }
+          name: auth?.user?.name,
+        },
       );
-      
+
       if (data?.success) {
         toast.success("Review submitted successfully!");
         setRating(5);
         setComment("");
-        getProduct(); 
+        getProduct();
       }
     } catch (error) {
       console.log(error);
@@ -173,7 +181,7 @@ const ProductDetails = () => {
       ? `\nVariant: ${selectedVariant.color || ""} ${selectedVariant.size || ""} ${selectedVariant.ram || ""}`
       : "";
 
-    // 🔴 WhatsApp লিংকের বাগটি ফিক্স করা হয়েছে
+    // 🔴 Price Calculation Fix
     const text = `Hello, I want to order:\n\n*${product.name}*${variantText}\nQuantity: ${quantity}\nTotal Price: ৳${currentUnitPrice * quantity}\n\nLink: ${window.location.href}`;
 
     window.open(
@@ -225,7 +233,6 @@ const ProductDetails = () => {
             )}
             <h1 className="details-title">{product.name}</h1>
 
-            {/* 🔴 নামের নিচে স্টার রেটিং দেখানো হলো */}
             {product?.rating > 0 && (
               <div className="mb-2 text-warning" style={{ fontSize: "14px" }}>
                 {"★".repeat(Math.round(product.rating))}
@@ -405,11 +412,22 @@ const ProductDetails = () => {
           >
             Description
           </button>
+
+          {/* 🔴 নতুন ভিডিও ট্যাব (যদি ভিডিও থাকে তবেই শো করবে) */}
+          {product?.videoLink && getYouTubeVideoId(product.videoLink) && (
+            <button
+              className={`nav-tab-btn ${activeTab === "video" ? "active" : ""}`}
+              onClick={() => scrollToSection("video")}
+            >
+              Video
+            </button>
+          )}
+
           <button
             className={`nav-tab-btn ${activeTab === "reviews" ? "active" : ""}`}
             onClick={() => scrollToSection("reviews")}
           >
-            Customer Reviews ({product?.numReviews || 0})
+            Reviews ({product?.numReviews || 0})
           </button>
         </div>
 
@@ -450,6 +468,42 @@ const ProductDetails = () => {
               dangerouslySetInnerHTML={{ __html: product?.description }}
             />
           </div>
+
+          {/* 🔴 ইউটিউব ভিডিও সেকশন */}
+          {product?.videoLink && getYouTubeVideoId(product.videoLink) && (
+            <div id="video" className="scroll-section mt-5">
+              <h4 className="section-heading border-bottom pb-2">
+                <i className="fa-brands fa-youtube text-danger me-2"></i>{" "}
+                Product Video
+              </h4>
+              <div
+                className="video-container mt-4"
+                style={{
+                  position: "relative",
+                  paddingBottom: "56.25%" /* 16:9 Aspect Ratio */,
+                  height: 0,
+                  overflow: "hidden",
+                  borderRadius: "10px",
+                  boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
+                }}
+              >
+                <iframe
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                  }}
+                  src={`https://www.youtube.com/embed/${getYouTubeVideoId(product.videoLink)}`}
+                  title="Product YouTube Video"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
+            </div>
+          )}
 
           <div id="reviews" className="scroll-section mt-5 mb-5">
             <h4 className="section-heading border-bottom pb-2">

@@ -78,6 +78,11 @@ const productSchema = new mongoose.Schema(
       enum: ["Active", "Inactive", "Out of Stock"],
       default: "Active",
     },
+    // অন্যান্য ফিল্ডের নিচে এটি যুক্ত করুন
+    videoLink: {
+      type: String,
+      default: "",
+    },
   },
   { timestamps: true },
 );
