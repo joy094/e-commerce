@@ -1,8 +1,8 @@
 /* --- CategorySection.css --- */
 
 :root {
-  --primary-color: #ff6347;
-  --arogga-blue: #1f74db;
+  --primary-color: #ff6347; /* আপনার থিমের রঙ */
+  --arogga-blue: #1f74db; /* 🔴 অ্যারোগ্গা ডিজাইনের নীল রঙ */
   --text-dark: #222;
   --text-light-grey: #666;
   --card-bg: #ffffff;
@@ -17,7 +17,7 @@
 }
 
 /* =========================================
-   Section Header & Title
+   Arogga Style Section Header & Title
 ========================================= */
 .section-header {
   display: flex;
@@ -28,8 +28,8 @@
 }
 
 .section-title {
-  font-size: 1rem !important;
-  font-weight: 500 !important;
+  font-size: 1rem !important; /* 🔴 ব্রাউজারের h3 ডিফল্ট স্টাইল ওভাররাইড করার জন্য */
+  font-weight: 500 !important; /* 🔴 ফন্ট আরও হালকা করতে চাইলে 500 বা 400 দিতে পারেন */
   color: #111827 !important;
   margin: 0 !important;
   text-transform: capitalize;
@@ -38,15 +38,39 @@
   gap: 6px;
 }
 
+/* 🔴 আরোগ্গার মতো হেডিংয়ের বাম পাশে একটি ছোট আকর্ষণীয় কালার বার (Accent Bar) যুক্ত করতে চাইলে এটি এনাবল করতে পারেন */
 .section-title::before {
   content: "";
   display: inline-block;
   width: 4px;
   height: 16px;
-  background-color: var(--brand-color, var(--arogga-blue));
+  background-color: #1f74db; /* থিমের নীল রঙ বা আপনার প্রাইমারি কালার */
   border-radius: 2px;
 }
 
+/* ডানপাশের "See All" বাটন ডিজাইন আরও গোছানো করার জন্য */
+.see-all-button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #1f74db; /* নীল রঙ */
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.85rem;
+  background: none;
+  border: none;
+  padding: 0;
+  transition: opacity 0.2s;
+}
+
+.see-all-button:hover {
+  opacity: 0.8;
+  color: #1f74db;
+}
+
+.see-all-button i {
+  font-size: 0.75rem;
+}
 .see-all-button {
   display: flex;
   align-items: center;
@@ -54,21 +78,16 @@
   color: var(--text-light-grey);
   text-decoration: none;
   font-weight: 600;
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   border: 1px solid var(--border-light);
-  padding: 4px 10px;
+  padding: 5px 12px;
   border-radius: 20px;
   transition: all 0.2s ease;
-  background: none;
 }
 
 .see-all-button:hover {
-  border-color: var(--brand-color, var(--primary-color));
-  color: var(--brand-color, var(--primary-color));
-}
-
-.see-all-button i {
-  font-size: 0.75rem;
+  border-color: var(--primary-color);
+  color: var(--primary-color);
 }
 
 /* --- Product Slider --- */
@@ -88,189 +107,158 @@
 }
 
 /* =========================================
-   Main Product Card Styling (Equal Height)
+   Main Product Card Styling
 ========================================= */
 .product-card {
   background-color: #fff;
-  border-radius: 10px;
+  border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
-  border: 1px solid #f1f5f9;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* প্রফেশনাল হালকা শ্যাডো */
+  border: 1px solid #f0f0f0;
   display: flex;
   flex-direction: column;
   height: 100%;
-  margin-right: 6px !important;
-  transition: all 0.3s ease;
+  margin-right: 6px !important; /* 🔴 ডানদিকে হালকা স্পেস দেওয়া হলো যাতে কার্ডগুলো গায়ে গায়ে লেগে না থাকে */
 }
 
 .product-card:hover {
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-  border-color: #e2e8f0;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+  border-color: #e5e5e5;
 }
 
 /* =========================================
-   Product Image (Larger & Cover Fit)
+   Product Image (Removed Inner Box for Larger Image)
 ========================================= */
 .product-img-wrapper {
   position: relative;
   width: 100%;
-  height: 180px; /* ডেক্সটপে ছবির স্ট্যান্ডার্ড হাইট */
-  background: #f8fafc;
+  height: 170px; /* উচ্চতা কিছুটা বাড়ানো হলো */
+  background: #ffffff !important; /* ভেতরের আলাদা ধূসর ব্যাকগ্রাউন্ড বাদ দেওয়া হলো */
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 !important;
+  border-bottom: 1px solid #f1f5f9; /* শুধু নিচে হালকা একটি দাগ থাকবে */
+  padding: 0 !important; /* 🔴 প্যাডিং জিরো করে দেওয়া হলো, যাতে ছবি পুরোপুরি স্পেস পায় */
   overflow: hidden;
-  border-radius: 10px 10px 0 0;
-  cursor: pointer;
+  border-radius: 8px 8px 0 0;
 }
 
 .product-img-wrapper img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* ছবি বড় ও আকর্ষণীয় দেখানোর জন্য */
-  transition: transform 0.4s ease;
+  object-fit: contain; /* ছবি কাটবে না, কিন্তু ম্যাক্সিমাম বড় দেখাবে */
+  padding: 5px; /* একদম বর্ডারের সাথে যেন লেগে না যায়, তার জন্য হালকা সেফটি স্পেস */
+  transition: transform 0.3s ease;
 }
-
 .product-card:hover .product-img-wrapper img {
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
 /* =========================================
-   Discount Ribbon Badge
+   Arogga Style Ribbon Badge (Compact & Small)
 ========================================= */
 .arogga-discount-badge {
   position: absolute;
   top: 0;
-  left: 10px;
-  background-color: var(--brand-color, var(--arogga-blue));
+  left: 12px;
+  background-color: #1f74db;
   color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 5px 6px 10px;
+  padding: 5px 6px 10px; /* প্যাডিং কমিয়ে ছোট করা হলো */
   z-index: 2;
   line-height: 1;
   clip-path: polygon(100% 0, 100% 100%, 50% 75%, 0 100%, 0 0);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
 .arogga-discount-badge .percent {
-  font-size: 11px;
+  font-size: 11px; /* ফন্ট সাইজ ছোট করা হলো */
   font-weight: 700;
 }
 
 .arogga-discount-badge .off-text {
-  font-size: 9px;
+  font-size: 9px; /* 'OFF' লেখাটি ছোট ও সুন্দর দেখাবে */
   font-weight: 600;
   margin-top: 2px;
 }
-
 /* =========================================
-   Product Info & Vertical Price Stack
+   Product Info & Price (Vertical Stack)
 ========================================= */
 .product-info {
-  padding: 10px !important;
+  padding: 8px !important; /* প্যাডিং কমানো হলো */
   text-align: left;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  padding: 5px; /* প্যাডিং প্রয়োজনমতো কমাতে পারেন */
 }
 
 .product-name {
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: 0.95rem;
+  font-weight: 500;
   color: var(--text-dark);
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  line-height: 1.35;
-  margin-bottom: 4px;
-  min-height: 2.6em;
+  line-height: 1.4;
+  margin-bottom: 3px;
+  min-height: 2.8em;
 }
 
-.product-name:hover {
-  color: var(--brand-color, var(--primary-color));
-}
-
-/* Rating Stars Container */
-.product-card-rating {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  margin-top: 2px;
-  margin-bottom: 6px;
-  min-height: 16px;
-}
-
-.product-card-rating .stars {
-  display: flex;
-  gap: 2px;
-}
-
-.product-card-rating .stars i {
-  color: #f59e0b;
-  font-size: 10px;
-}
-
-.product-card-rating .review-count {
-  color: #64748b;
-  font-size: 10px;
-  font-weight: 500;
-}
-
-/* Price Container (Vertical) */
+/* 🔴 প্রাইস কন্টেইনার (দামগুলো উপর-নিচ করে সাজানো) */
 .price-container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 1px;
-  margin-bottom: 8px;
+  gap: 2px;
+  margin-bottom: 3px;
   margin-top: auto;
 }
 
 .original-price-strike {
   text-decoration: line-through;
-  color: #94a3b8;
-  font-size: 0.8rem;
+  color: #888;
+  font-size: 0.9rem;
   font-weight: 500;
 }
 
 .price-tag {
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   font-weight: 700;
-  color: var(--brand-color, #0f172a);
+  color: #0f172a;
   margin: 0;
 }
 
-/* Add to Cart / Select Options Button */
+/* মূল বাটনের ডিজাইন */
 .add-to-cart-btn {
   width: 100%;
-  background-color: #fff;
-  border: 1px solid var(--brand-color, var(--primary-color));
-  color: var(--brand-color, var(--primary-color));
-  padding: 7px 8px;
-  font-size: 0.85rem;
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  padding: 8px 10px;
+  font-size: 0.9rem;
   font-weight: 600;
-  border-radius: 6px;
+  border-radius: 4px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background-color 0.2s ease;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 5px;
   white-space: nowrap;
+  overflow: hidden;
 }
 
 .add-to-cart-btn:hover {
-  background-color: var(--brand-color, var(--primary-color));
-  color: #fff;
+  background-color: #e0533c;
 }
 
 /* =========================================
-   Swiper Navigation Arrows
+   Swiper Navigation Arrows (Desktop & Mobile)
 ========================================= */
+/* 🔴 অ্যারো বাটনগুলো যেন সব ডিভাইসেই ভিজিবল থাকে */
 .product-slider-wrapper .swiper-button-next,
 .product-slider-wrapper .swiper-button-prev {
   display: flex !important;
@@ -314,7 +302,7 @@
 
 .skeleton-card {
   pointer-events: none;
-  border-radius: 10px;
+  border-radius: 8px;
   border: 1px solid var(--border-light);
 }
 
@@ -323,10 +311,14 @@
   aspect-ratio: 1 / 1;
 }
 
+.product-info-skeleton {
+  padding: 12px;
+}
+
 .skeleton-line {
-  height: 10px;
+  height: 12px;
   border-radius: 4px;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .skeleton-line.short {
@@ -335,72 +327,210 @@
 
 .skeleton-line.price {
   width: 50%;
-  height: 14px;
-  margin-top: 10px;
+  height: 16px;
+  margin-top: 15px;
 }
 
 /* =========================================
-   Mobile Optimization (Compact Card & Larger Image)
+   Responsive Adjustments (Mobile Optimized)
 ========================================= */
 @media (max-width: 768px) {
   .category-section {
-    margin: 15px auto;
-    padding: 0 8px;
+    margin: 20px auto;
+    padding: 0 10px;
   }
 
   .section-title {
-    font-size: 1.1rem !important;
-  }
-
-  /* মোবাইলে কার্ডের প্যাডিং ও হাইট কমিয়ে কমপ্যাক্ট করা হলো */
-  .product-img-wrapper {
-    height: 135px; /* মোবাইলে ছবির উচ্চতা অপ্টিমাইজ করা হলো যাতে বড় দেখায় */
+    font-size: 1.25rem;
   }
 
   .product-info {
-    padding: 6px !important; /* প্যাডিং কমিয়ে স্পেস বাঁচানো হলো */
+    padding: 10px;
   }
 
   .product-name {
-    font-size: 0.8rem;
-    min-height: 2.6em;
-    margin-bottom: 2px;
+    font-size: 0.85rem;
+    min-height: 2.8em;
   }
 
   .price-tag {
-    font-size: 0.95rem;
+    font-size: 1rem;
   }
 
   .original-price-strike {
-    font-size: 0.75rem;
-  }
-
-  .product-card-rating {
-    margin-bottom: 4px;
+    font-size: 0.8rem;
   }
 
   .add-to-cart-btn {
-    padding: 5px 4px;
+    padding: 8px 6px;
     font-size: 0.75rem;
     gap: 3px;
   }
 
-  /* Mobile Swiper Arrows */
+  /* =========================================
+   Custom Swiper Navigation Arrows (Bulletproof Fix)
+========================================= */
+
   .product-slider-wrapper .swiper-button-next,
   .product-slider-wrapper .swiper-button-prev {
-    width: 30px !important;
-    height: 30px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 36px !important;
+    height: 36px !important;
+    background-color: #ffffff !important;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15) !important;
+    border-radius: 50% !important;
+    top: 42% !important;
+    transition: all 0.2s ease;
   }
 
-  .product-slider-wrapper .swiper-button-prev::before,
+  .product-slider-wrapper .swiper-button-next:hover,
+  .product-slider-wrapper .swiper-button-prev:hover {
+    background-color: #1f74db !important; /* হোভার করলে নীল ব্যাকগ্রাউন্ড হবে */
+  }
+
+  /* Swiper এর ডিফল্ট অদৃশ্য বা মুছে যাওয়া অ্যারো পুরোপুরি হাইড করা হলো */
+  .product-slider-wrapper .swiper-button-next::after,
+  .product-slider-wrapper .swiper-button-prev::after {
+    content: "" !important;
+  }
+
+  /* নিজস্ব স্পষ্ট তীর চিহ্ন তৈরি করা হলো */
+  .product-slider-wrapper .swiper-button-prev::before {
+    content: "‹" !important;
+    font-size: 26px !important;
+    font-weight: bold !important;
+    color: #1f74db !important; /* স্পষ্ট নীল রঙ */
+    line-height: 1;
+    margin-top: -3px;
+  }
+
   .product-slider-wrapper .swiper-button-next::before {
-    font-size: 20px !important;
+    content: "›" !important;
+    font-size: 26px !important;
+    font-weight: bold !important;
+    color: #1f74db !important; /* স্পষ্ট নীল রঙ */
+    line-height: 1;
+    margin-top: -3px;
   }
 
+  /* হোভার করার সময় তীর চিহ্ন সাদা হয়ে যাবে */
+  .product-slider-wrapper .swiper-button-next:hover::before,
+  .product-slider-wrapper .swiper-button-prev:hover::before {
+    color: #ffffff !important;
+  }
+
+  /* অ্যারো পজিশন */
   .product-slider-wrapper .swiper-button-prev {
-    left: -5px !important;
+    left: -10px !important;
   }
   .product-slider-wrapper .swiper-button-next {
-    right: -5px !important;
+    right: -10px !important;
   }
+}
+
+/* =========================================
+   Product Card Rating Stars
+========================================= */
+.product-card-rating {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  margin-bottom: 8px;
+  min-height: 16px; /* 🔴 এই লাইনটি ফাঁকা জায়গাটুকু ধরে রাখবে */
+}
+
+.product-card-rating .stars {
+  display: flex;
+  gap: 2px;
+}
+
+.product-card-rating .stars i {
+  color: #f59e0b; /* সুন্দর সোনালী/হলুদ রঙ */
+  font-size: 11px; /* কার্ডের সাথে মানানসই ছোট সাইজ */
+}
+
+.product-card-rating .review-count {
+  color: #64748b; /* হালকা ধূসর রঙ */
+  font-size: 11px;
+  font-weight: 500;
+}
+
+/* =========================================
+   ১. কার্ড ইকুয়াল হাইট (Equal Height Fix)
+========================================= */
+.modern-card {
+  background: #fff;
+  border: 1px solid #f1f5f9;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* 🔴 FIX: কন্টেন্ট যাই থাকুক, সব কার্ড লম্বায় সমান থাকবে */
+}
+
+/* =========================================
+   ২. ছবি বড় দেখানো (Padding & Shadow Remove)
+========================================= */
+.card-img-wrapper {
+  height: 200px;
+  padding: 0; /* 🔴 FIX: 15px প্যাডিং রিমুভ করা হলো যাতে ছবি বড় দেখায় */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8fafc;
+  cursor: pointer;
+  overflow: hidden; /* ছবি যাতে কার্ডের বাইরে না যায় */
+}
+
+.card-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 🔴 FIX: contain এর বদলে cover দিলে ছবি কার্ডের বর্ডার পর্যন্ত পুরো জায়গা জুড়ে থাকবে */
+  transition: 0.4s ease;
+}
+
+/* =========================================
+   ৩. গ্লোবাল ব্র্যান্ড কালার ইমপ্লিমেন্ট (Dynamic Color)
+========================================= */
+.product-title:hover {
+  color: var(--brand-color); /* 🔴 FIX */
+}
+
+.current-price {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--brand-color); /* 🔴 FIX */
+}
+
+.add-cart-btn {
+  width: 100%;
+  padding: 10px;
+  background: #fff;
+  border: 1px solid var(--brand-color); /* 🔴 FIX */
+  color: var(--brand-color); /* 🔴 FIX */
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.add-cart-btn:hover {
+  background: var(--brand-color); /* 🔴 FIX */
+  color: #fff;
+}
+
+/* রিবনের কালারটাও আপনি চাইলে আপনার লোগোর কালার দিতে পারেন */
+.discount-ribbon {
+  background-color: var(
+    --brand-color
+  ); /* 🔴 FIX: আগের নীল রঙের বদলে গ্লোবাল কালার */
 }
