@@ -1,3 +1,5 @@
+//src/components/pages/CategoryProduct.jsx
+
 import React, { useState, useEffect } from "react";
 import Layout from "../../components/pages/Layout";
 import { useParams, useNavigate } from "react-router-dom";

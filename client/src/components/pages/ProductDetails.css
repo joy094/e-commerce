@@ -403,17 +403,28 @@
 }
 
 /* =========================================
-   YouTube Video Player Section
+   YouTube Video Player Section (Updated Spacing)
 ========================================= */
+#video {
+  margin-top: 40px !important;
+  margin-bottom: 40px !important;
+}
+
+#video .section-heading {
+  margin-bottom: 20px !important; /* হেডিং এবং ভিডিওর মাঝে গ্যাপ */
+}
+
 .video-container {
   position: relative;
-  padding-bottom: 56.25%; /* 16:9 Aspect Ratio (ইউটিউবের স্ট্যান্ডার্ড সাইজ) */
+  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
   height: 0;
   overflow: hidden;
   border-radius: 12px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-  background-color: #000; /* ভিডিও লোড হওয়ার আগে কালো ব্যাকগ্রাউন্ড দেখাবে */
+  background-color: #000;
   border: 1px solid #e2e8f0;
+  margin-top: 15px !important;
+  margin-bottom: 35px !important; /* ভিডিও এবং কাস্টমার রিভিউর মাঝে গ্যাপ */
 }
 
 .video-container iframe {
@@ -572,6 +583,15 @@
   background-color: #1e293b;
   color: #ffffff;
   transform: scale(1.02);
+}
+
+
+/* =========================================
+   YouTube Icon Color Fix
+========================================= */
+#video .section-heading i,
+.fa-youtube {
+  color: #ff0000 !important; /* Official YouTube Red */
 }
 
 /* =========================================

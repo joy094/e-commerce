@@ -1,16 +1,21 @@
 // CategorySection.jsx
 
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // 🔴 useNavigate ইমপোর্ট করা হলো
 import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
+import { useCart } from "../../context/cart"; // 🔴 Cart context ইমপোর্ট করা হলো
+import { toast } from "react-toastify"; // 🔴 Toast ইমপোর্ট করা হলো
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "./CategorySection.css";
 
 const CategorySection = ({ title, slug }) => {
+  const navigate = useNavigate(); // 🔴 navigate হুক
+  const [cart, setCart] = useCart(); // 🔴 cart হুক
+
   const [products, setProducts] = useState(() => {
     const savedData = localStorage.getItem(`cache_${slug}`);
     return savedData ? JSON.parse(savedData) : [];
@@ -67,8 +72,8 @@ const CategorySection = ({ title, slug }) => {
         <Swiper
           slidesPerView={2}
           spaceBetween={10}
-          navigation={!loading} /* অ্যারো চিহ্ন এনাবল করা আছে */
-          slidesPerGroup={1} /* ক্লিকে ১টা করে স্লাইড হবে */
+          navigation={!loading}
+          slidesPerGroup={1}
           modules={[Navigation]}
           className="productSwiper"
           breakpoints={{
@@ -98,10 +103,11 @@ const CategorySection = ({ title, slug }) => {
                     className="product-card-link"
                     style={{ textDecoration: "none" }}
                   >
-                    <div className="product-card">
+                    <div className="product-card" style={{ height: "100%" }}>
+                      {" "}
+                      {/* 🔴 কার্ডের উচ্চতা সমান রাখার জন্য */}
                       <div className="product-img-wrapper">
                         {/* ============ ১. Arogga স্টাইল ডিসকাউন্ট রিবন ============ */}
-                        {/* 🔴 offerPrice এর বদলে discountPrice ব্যবহার করা হলো */}
                         {p.discountPrice > 0 && p.discountPrice < p.price && (
                           <div className="arogga-discount-badge">
                             <span className="percent">
@@ -113,17 +119,19 @@ const CategorySection = ({ title, slug }) => {
                             <span className="off-text">OFF</span>
                           </div>
                         )}
-
-                        <img src={p.photo} alt={p.name} />
+                        <img
+                          src={`/api/v1/product/product-photo/${p._id}`}
+                          alt={p.name}
+                        />{" "}
+                        {/* 🔴 ছবি API থেকে আনার ব্যবস্থা করা হলো, আগে সরাসরি p.photo ছিল */}
                       </div>
-
                       <div className="product-info">
                         <h5 className="product-name">
                           {p.name.substring(0, 40)}
                           {p.name.length > 40 ? "..." : ""}
                         </h5>
 
-                        {/* ============ ২. প্রাইস সেকশন (কাটা দাম উপরে) ============ */}
+                        {/* ============ ২. প্রাইস সেকশন ============ */}
                         <div className="price-container">
                           {p.discountPrice > 0 && p.discountPrice < p.price ? (
                             <>
@@ -138,7 +146,7 @@ const CategorySection = ({ title, slug }) => {
                             <span className="price-tag">৳ {p.price}</span>
                           )}
 
-                          {/* 🔴 রেটিংয়ের কন্টেইনার সব কার্ডেই থাকবে, যাতে হাইট সমান থাকে */}
+                          {/* রেটিং কন্টেইনার */}
                           <div className="product-card-rating">
                             {p.reviews && p.reviews.length > 0 && (
                               <>
@@ -164,7 +172,19 @@ const CategorySection = ({ title, slug }) => {
 
                         {/* ============ ৩. ডাইনামিক বাটন লজিক ============ */}
                         {p.variants && p.variants.length > 0 ? (
-                          <button className="add-to-cart-btn">
+                          <button
+                            className="add-to-cart-btn"
+                            style={{
+                              backgroundColor: "#0f172a",
+                              borderColor: "#0f172a",
+                              color: "#fff",
+                            }} /* 🔴 Select Options বাটন ডার্ক করা হলো */
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              navigate(`/product/${p.slug}`);
+                            }}
+                          >
                             Select Options
                           </button>
                         ) : (
@@ -173,7 +193,14 @@ const CategorySection = ({ title, slug }) => {
                             onClick={(e) => {
                               e.preventDefault();
                               e.stopPropagation();
-                              console.log("Added to cart directly:", p.name);
+
+                              // 🔴 আসল Add to Cart লজিক বসানো হলো
+                              setCart([...cart, p]);
+                              localStorage.setItem(
+                                "cart",
+                                JSON.stringify([...cart, p]),
+                              );
+                              toast.success("Item Added to cart");
                             }}
                           >
                             <i className="fa-solid fa-cart-shopping"></i> Add to
