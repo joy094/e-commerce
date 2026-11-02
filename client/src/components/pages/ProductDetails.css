@@ -7,6 +7,8 @@
   padding: 40px;
   border-radius: 15px;
   box-shadow: 0 5px 25px rgba(0, 0, 0, 0.03);
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 .details-grid {
@@ -26,6 +28,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  text-align: center;
 }
 
 .main-img-box img {
@@ -36,10 +42,12 @@
 
 .thumbnail-gallery {
   display: flex;
+  flex-wrap: wrap; /* 🔴 FIX: ছবিগুলো জায়গা না পেলে নিচে নেমে আসবে */
   gap: 12px;
   margin-top: 15px;
-  overflow-x: auto;
   padding-bottom: 5px;
+  justify-content: center;
+  width: 100%;
 }
 
 .thumb {
@@ -51,6 +59,7 @@
   object-fit: contain;
   padding: 5px;
   transition: 0.3s;
+  flex-shrink: 0; /* 🔴 FIX: ছবিগুলো চ্যাপ্টা হওয়া থেকে রোধ করবে */
 }
 
 .thumb.active,
@@ -235,8 +244,10 @@
 .main-action-btns,
 .support-action-btns {
   display: flex;
+  flex-wrap: wrap; /* 🔴 FIX: বাটন জায়গা না পেলে নিচে নামবে */
   gap: 12px;
   margin-bottom: 12px;
+  width: 100%;
 }
 
 .support-action-btns {
@@ -244,8 +255,9 @@
 }
 
 .btn-custom {
-  gap: 8px !important; /* আইকন এবং টেক্সটের মাঝে ৮ পিক্সেল গ্যাপ তৈরি করবে */
-  flex: 1;
+  gap: 8px !important;
+  flex: 1 1 calc(50% - 10px); /* 🔴 FIX: বাটনগুলো সমানভাবে অর্ধেক অর্ধেক জায়গা নেবে */
+  min-width: 140px; /* 🔴 FIX: খুব বেশি ছোট হওয়া থেকে আটকাবে */
   padding: 12px 15px;
   border-radius: 8px;
   font-weight: 700;
@@ -400,7 +412,7 @@
   overflow: hidden;
   border-radius: 12px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-  background-color: #000; /* ভিডিও লোড হওয়ার আগে কালো ব্যাকগ্রাউন্ড দেখাবে */
+  background-color: #000; /* ভিডিও লোড হওয়ার আগে কালো ব্যাকগ্রাউন্ড দেখাবে */
   border: 1px solid #e2e8f0;
 }
 
@@ -411,24 +423,6 @@
   width: 100%;
   height: 100%;
   border: none;
-}
-
-/* =========================================
-   Mobile Responsiveness for Extra Tabs
-========================================= */
-@media (max-width: 768px) {
-  .product-nav-tabs {
-    flex-wrap: wrap; /* মোবাইলে ট্যাবগুলো জায়গা না পেলে নিচে নেমে আসবে */
-    gap: 10px;
-    justify-content: center;
-  }
-
-  .nav-tab-btn {
-    font-size: 13px;
-    padding: 8px 15px;
-    flex-grow: 1; /* মোবাইলে ট্যাবগুলো সমান জায়গা নেবে */
-    text-align: center;
-  }
 }
 
 /* =========================================
@@ -470,6 +464,12 @@
     max-height: 300px !important;
   }
 
+  /* 🔴 FIX: মোবাইলে থাম্বনেইলগুলো ছোট করা হলো */
+  .thumbnail-gallery .thumb {
+    width: 60px !important;
+    height: 60px !important;
+  }
+
   .details-title {
     font-size: 1.3rem !important;
     line-height: 1.4 !important;
@@ -482,15 +482,15 @@
   /* Action Buttons Mobile Tweaks (2x2 Grid Fix) */
   .main-action-btns,
   .support-action-btns {
-    flex-direction: row !important; /* 🔴 column এর বদলে row করে দেওয়া হলো, ফলে পাশাপাশি ২টি বাটন থাকবে */
+    flex-direction: row !important;
     gap: 8px !important;
   }
 
   .btn-custom {
     width: 100% !important;
-    padding: 12px 5px !important; /* মোবাইলের জন্য প্যাডিং কিছুটা কমানো হলো */
-    font-size: 12px !important; /* ছোট স্ক্রিনে লেখা যেন ভেঙে না যায়, তাই ফন্ট সাইজ মানানসই করা হলো */
-    white-space: nowrap !important; /* টেক্সট এক লাইনেই থাকবে */
+    padding: 12px 5px !important;
+    font-size: 12px !important;
+    white-space: nowrap !important;
   }
 
   .spec-category {
@@ -509,6 +509,20 @@
 
   .variant-grid {
     grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)) !important;
+  }
+
+  /* 🔴 FIX: Mobile Responsiveness for Extra Tabs */
+  .product-nav-tabs {
+    flex-wrap: wrap; /* মোবাইলে ট্যাবগুলো জায়গা না পেলে নিচে নেমে আসবে */
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .nav-tab-btn {
+    font-size: 13px;
+    padding: 8px 15px;
+    flex-grow: 1; /* মোবাইলে ট্যাবগুলো সমান জায়গা নেবে */
+    text-align: center;
   }
 }
 
@@ -530,7 +544,7 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04) !important;
 }
 
-/* হোভার করলে কার্ড উপরের দিকে ভেসে উঠবে এবং শ্যাডো গাঢ় হবে */
+/* হোভার করলে কার্ড উপরের দিকে ভেসে উঠবে এবং শ্যাডো গাঢ় হবে */
 .related-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
